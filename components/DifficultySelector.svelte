@@ -22,7 +22,4 @@
   select {
     text-transform: capitalize;
   }
-  option {
-    padding-left: 10px;
-  }
 </style>
