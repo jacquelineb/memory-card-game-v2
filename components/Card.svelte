@@ -1,9 +1,12 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
   import type { CardType } from '../types/card.type';
+
   export let card: CardType;
 </script>
 
-<div>
+<div on:click={(e) => dispatch('click')}>
   <img src={card.imgSrc} alt={card.name} />
   <p class="card-name">{card.name}</p>
 </div>
@@ -12,8 +15,9 @@
   div {
     width: 30%;
     max-width: 200px;
-    text-transform: capitalize;
+    text-transform: uppercase;
     font-weight: 600;
+    cursor: pointer;
   }
 
   img {
@@ -25,6 +29,6 @@
   p {
     background-color: #b01e1e;
     margin: 0;
-    padding: 8px;
+    padding: 6px;
   }
 </style>

@@ -1,12 +1,14 @@
 <script lang="ts">
   import Card from './Card.svelte';
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
   import type { CardType } from '../types/card.type';
-  export let cards: CardType[] = [];
+  export let cards: (CardType & { clicked: boolean })[] = [];
 </script>
 
 <div class="cards">
-  {#each cards as card}
-    <Card {card} />
+  {#each cards as card (card.id)}
+    <Card {card} on:click={() => dispatch('click', card.id)} />
   {/each}
 </div>
 
