@@ -6,14 +6,16 @@
   import win from '../assets/win.gif';
   import lose from '../assets/lose.gif';
 
-  export let status: GameStatus;
+  export let scoreStatus: string;
+  export let gameStatus: GameStatus;
 </script>
 
-{#if status !== GameStatus.PENDING}
+{#if gameStatus !== GameStatus.PENDING}
   <div class="container">
     <div out:fade={{ duration: 100 }} class="alert">
-      <span>You {status}!</span>
-      {#if status === GameStatus.LOSE}
+      <p class="game-status">You {gameStatus}!</p>
+      <p>Final score: {scoreStatus}</p>
+      {#if gameStatus === GameStatus.LOSE}
         <img src={lose} alt="lose" />
       {:else}
         <img src={win} alt="win" />
@@ -34,6 +36,7 @@
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.5);
   }
+
   .alert {
     background-color: #b01e1e;
     width: 90vw;
@@ -46,7 +49,7 @@
     padding: 16px 0;
   }
 
-  span {
+  .game-status {
     text-transform: uppercase;
     font-weight: 700;
     font-size: 1.5em;

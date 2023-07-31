@@ -12,7 +12,7 @@
   let difficulty = localStore<DifficultyType>('difficulty', DIFFICULTY_LEVELS[1]);
   let score = 0;
   let cards = getCards($difficulty.numCards);
-  let status: GameStatus = GameStatus.PENDING;
+  let gameStatus: GameStatus = GameStatus.PENDING;
 
   function getCards(numCards: number) {
     return shuffle(DECK)
@@ -25,7 +25,7 @@
   const resetGame = () => {
     cards = getCards($difficulty.numCards);
     score = 0;
-    status = GameStatus.PENDING;
+    gameStatus = GameStatus.PENDING;
   };
 
   const handleClickCard = (cardId: number) => {
@@ -34,12 +34,12 @@
       cards[i] = { ...cards[i], clicked: true };
       ++score;
       if (score === cards.length) {
-        status = GameStatus.WIN;
+        gameStatus = GameStatus.WIN;
         return;
       }
       cards = shuffle(cards);
     } else {
-      status = GameStatus.LOSE;
+      gameStatus = GameStatus.LOSE;
     }
   };
 
@@ -62,7 +62,11 @@
     }}
   />
   <Cards {cards} on:click={(e) => handleClickCard(e.detail)} />
-  <GameoverAlert {status} on:dismiss={() => resetGame()} />
+  <GameoverAlert
+    {gameStatus}
+    scoreStatus={`${score} / ${$difficulty.numCards}`}
+    on:dismiss={() => resetGame()}
+  />
 </main>
 
 <style>
