@@ -65,20 +65,6 @@
 </main>
 
 <style>
-  main::before {
-    content: '';
-    display: block;
-    position: fixed;
-    background-image: url('./assets/background.jpg');
-    background-position: bottom;
-    width: 100%;
-    z-index: -1;
-    opacity: 0.8;
-    top: 0;
-    bottom: 0;
-    left: 0;
-  }
-
   .heading {
     padding: 20px;
   }
