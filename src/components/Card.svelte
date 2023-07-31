@@ -18,6 +18,8 @@
     text-transform: uppercase;
     font-weight: 600;
     cursor: pointer;
+    border-radius: 6px;
+    overflow: hidden;
   }
 
   img {
