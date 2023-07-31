@@ -33,4 +33,10 @@
     margin: 0;
     padding: 6px;
   }
+
+  @media (hover: hover) {
+    div:hover {
+      transform: scale(1.1);
+    }
+  }
 </style>
