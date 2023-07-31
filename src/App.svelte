@@ -1,16 +1,17 @@
 <script lang="ts">
   import { DECK, DIFFICULTY_LEVELS } from './utils/gameData';
   import { shuffle } from './utils/shuffleArray';
+  import { localStore } from './utils/localStore';
+  import type { DifficultyType } from './types/difficulty.type';
   import Cards from './components/Cards.svelte';
   import DifficultySelector from './components/DifficultySelector.svelte';
   import ScoreDisplay from './components/ScoreDisplay.svelte';
   import GameoverAlert from './components/GameoverAlert.svelte';
   import { GameStatus } from './types/gameStatus.enum';
-  import type { DifficultyType } from './types/difficulty.type';
 
-  let difficulty: DifficultyType = DIFFICULTY_LEVELS[0];
+  let difficulty = localStore<DifficultyType>('difficulty', DIFFICULTY_LEVELS[1]);
   let score = 0;
-  let cards = getCards(difficulty.numCards);
+  let cards = getCards($difficulty.numCards);
   let status: GameStatus = GameStatus.PENDING;
 
   function getCards(numCards: number) {
@@ -22,7 +23,7 @@
   }
 
   const resetGame = () => {
-    cards = getCards(difficulty.numCards);
+    cards = getCards($difficulty.numCards);
     score = 0;
     status = GameStatus.PENDING;
   };
@@ -43,7 +44,7 @@
   };
 
   const handleDifficultyChange = (newDifficulty: DifficultyType) => {
-    difficulty = newDifficulty;
+    $difficulty = newDifficulty;
     resetGame();
   };
 </script>
@@ -55,7 +56,7 @@
     <ScoreDisplay {score} />
   </div>
   <DifficultySelector
-    currDifficulty={difficulty}
+    currDifficulty={$difficulty}
     on:change={(e) => {
       handleDifficultyChange(e.detail);
     }}

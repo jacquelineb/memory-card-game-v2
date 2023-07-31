@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { localStore } from '../localStore';
+  import { localStore } from '../utils/localStore';
+
   export let score = 0;
   let bestScore = localStore<number>('best-score', 0);
 
