@@ -19,24 +19,24 @@
     justify-content: center;
     max-width: 1600px;
     margin: 20px auto;
-    gap: 6px;
+    gap: 8px;
   }
 
   @media (min-width: 576px) {
     .cards {
-      gap: 10px;
+      gap: 12px;
     }
   }
 
   @media (min-width: 768px) {
     .cards {
-      gap: 14px;
+      gap: 16px;
     }
   }
 
   @media (min-width: 992px) {
     .cards {
-      gap: 18px;
+      gap: 20px;
     }
   }
 </style>
