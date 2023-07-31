@@ -1,13 +1,11 @@
 <script lang="ts">
-  // your script goes here
-  import { fade } from 'svelte/transition';
   import { createEventDispatcher } from 'svelte';
-  import { GameStatus } from '../types/gameStatus.enum';
   const dispatch = createEventDispatcher();
+  import { fade } from 'svelte/transition';
+  import { GameStatus } from '../types/gameStatus.enum';
   import win from '../assets/win.gif';
   import lose from '../assets/lose.gif';
 
-  // export let visible: boolean = false;
   export let status: GameStatus;
 </script>
 
