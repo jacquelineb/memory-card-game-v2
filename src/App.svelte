@@ -6,19 +6,20 @@
   import ScoreDisplay from './components/ScoreDisplay.svelte';
   import GameoverAlert from './components/GameoverAlert.svelte';
   import { GameStatus } from './types/gameStatus.enum';
+  import type { DifficultyType } from './types/difficulty.type';
 
-  let difficulty = DIFFICULTY_LEVELS[0];
+  let difficulty: DifficultyType = DIFFICULTY_LEVELS[0];
   let score = 0;
-  $: cards = getCards(difficulty.numCards);
-
+  let cards = getCards(difficulty.numCards);
   let status: GameStatus = GameStatus.PENDING;
-  const getCards = (numCards: number) => {
+
+  function getCards(numCards: number) {
     return shuffle(DECK)
       .slice(0, numCards)
       .map((card) => {
         return { ...card, clicked: false };
       });
-  };
+  }
 
   const resetGame = () => {
     cards = getCards(difficulty.numCards);
@@ -40,6 +41,11 @@
       status = GameStatus.LOSE;
     }
   };
+
+  const handleDifficultyChange = (newDifficulty: DifficultyType) => {
+    difficulty = newDifficulty;
+    resetGame();
+  };
 </script>
 
 <main>
@@ -48,13 +54,18 @@
     <p>Click a card to start the game. The game is over if you click a card more than once!</p>
     <ScoreDisplay {score} />
   </div>
-  <DifficultySelector bind:currDifficulty={difficulty} />
+  <DifficultySelector
+    currDifficulty={difficulty}
+    on:change={(e) => {
+      handleDifficultyChange(e.detail);
+    }}
+  />
   <Cards {cards} on:click={(e) => handleClickCard(e.detail)} />
   <GameoverAlert {status} on:dismiss={() => resetGame()} />
 </main>
 
 <style>
-  main:before {
+  main::before {
     content: '';
     display: block;
     position: fixed;
@@ -69,6 +80,6 @@
   }
 
   .heading {
-    margin: 20px;
+    padding: 20px;
   }
 </style>

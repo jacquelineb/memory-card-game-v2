@@ -1,10 +1,15 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
   import { DIFFICULTY_LEVELS } from '../utils/gameData';
 
   export let currDifficulty = DIFFICULTY_LEVELS[1];
   let selection = currDifficulty.name;
 
-  $: currDifficulty = DIFFICULTY_LEVELS.find((dl) => dl.name === selection);
+  $: dispatch(
+    'change',
+    DIFFICULTY_LEVELS.find((dl) => dl.name === selection)
+  );
 </script>
 
 <div>
