@@ -3,6 +3,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/memory-card-game-v2/',
   plugins: [svelte()],
   build: {
     rollupOptions: {
